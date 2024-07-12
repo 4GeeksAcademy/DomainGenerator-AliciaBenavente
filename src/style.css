@@ -1,1 +1,8 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+body {
+  background-color: burlywood;
+}
+
+h3 {
+  color: rgb(134, 110, 79);
+}
