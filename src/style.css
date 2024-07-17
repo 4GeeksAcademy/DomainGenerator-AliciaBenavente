@@ -4,6 +4,8 @@ body {
   color: aquamarine;
 }
 
-label {
+#pronounLabel,
+#nameLabel,
+#adjectiveLabel {
   color: black;
 }
