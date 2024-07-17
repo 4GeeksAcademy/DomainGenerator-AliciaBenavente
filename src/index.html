@@ -14,8 +14,76 @@
   </head>
   <body>
     <div class="container-fluid text-center">
-      <h1 class="mt-5 mb-2">My Domain Generator</h1>
-      <h3 class="mb-4">(I bet you won't read all of them, for sure)</h3>
+      <h1 class="mt-5 mb-2">Here you can create your Domain</h1>
+      <h5>
+        Hello! Welcome to the Domain Generator. Here you can create your own
+        Domain.
+      </h5>
+      <br />
+      <h5>Let's try it!</h5>
+      <form id="domainForm">
+        <div class="row justify-content-center">
+          <!--pronoum-->
+          <div class="col-2 d-inline-block form-floating mb-3">
+            <input
+              type="text"
+              class="form-control "
+              id="pronoun"
+              placeholder="her"
+              required
+            />
+            <label for="validationPronoum" class="form-label fw-semibold ps-4"
+              >Pronoun</label
+            >
+          </div>
+          <!--Adjective-->
+          <div class="col-2 d-inline-block form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="adjective"
+              placeholder="clumsy"
+              required
+            />
+            <label for="validationAdjective" class="form-label fw-semibold ps-4"
+              >Adjective</label
+            >
+          </div>
+          <!--Name-->
+          <div class="col-2 d-inline-block form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="mother"
+              required
+            />
+            <label for="validationName" class="form-label fw-semibold ps-4"
+              >Name</label
+            >
+          </div>
+        </div>
+        <br />
+        <div class="col">
+          <div class="col d-inline-block">
+            <input type="radio" id=".com" name="extensionRadio" value=".com" />
+            <label for=".com">.com</label><br />
+          </div>
+          <div class="col d-inline-block">
+            <input type="radio" id=".es" name="extensionRadio" value=".es" />
+            <label for=".es">.es</label><br />
+          </div>
+        </div>
+        <br />
+        <button class="btn btn-outline-light" type="submit">
+          Create Domain
+        </button>
+        <br />
+        <br />
+      </form>
+      <div id="result"></div>
+      <br />
+      <p>Here you have some examples</p>
       <pre id="domain"></pre>
     </div>
     <script src="app.js"></script>

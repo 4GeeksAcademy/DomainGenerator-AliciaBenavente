@@ -1,8 +1,9 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 body {
-  background-color: burlywood;
+  background-color: rgb(21, 93, 63);
+  color: aquamarine;
 }
 
-h3 {
-  color: rgb(134, 110, 79);
+label {
+  color: black;
 }
