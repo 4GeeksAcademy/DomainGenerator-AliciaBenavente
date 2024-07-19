@@ -13,26 +13,10 @@
     <link rel="shortcut icon" href="./4geeks.ico" />
   </head>
   <body>
-    <div
-      class="alert alert-success d-flex align-items-center"
-      role="alert"
-      id="positiveAlert"
-    >
-      <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:">
-        <use xlink:href="#check-circle-fill" />
-      </svg>
-      <div>
-        Great! Here you have the domain!
-      </div>
-      <div>
-        <button
-          type="button"
-          class="btn-close"
-          aria-label="Close"
-          id="closeButton"
-        ></button>
-      </div>
-    </div>
+    <div id="savedWordMessage" class="alert alert-success mt-3 ms-3 w-25" role="alert">Word successfully added!</div>
+    <div id="deletedWordMessage" class="alert alert-success mt-3 ms-3 w-25" role="alert">Word successfully deleted!</div>
+    <div id="savedWordMessageFail" class="alert alert-danger mt-3 ms-3 w-50" role="alert">The word could not be added. Check if it's already a possibility.</div>
+    <div id="deletedWordMessageFail" class="alert alert-danger mt-3 ms-3 w-50" role="alert">The word could not be deleted. Check if it's a possibilitie.</div>
 
     <div class="container-fluid text-center">
       <h1 class="mt-5 mb-2">Here you can create your Domain</h1>
@@ -41,83 +25,146 @@
         Domain.
       </h5>
       <br />
-      <h5>Let's try it!</h5>
+      <h5 class="mb-4">Let's try it!</h5>
       <form id="domainForm">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
           <!--pronoum-->
           <div class="col-2 d-inline-block form-floating mb-3">
             <input
               type="text"
-              class="form-control "
-              id="pronoun"
+              class="form-control"
+              id="pronounInput"
               placeholder="her"
               required
             />
             <label
               for="validationPronoum"
               id="pronounLabel"
-              class="form-label fw-semibold ps-4"
+              class="form-label fw-semibold ps-4 text-secondary"
               >Pronoun</label
             >
+            <div class="d-inline-block">
+              <button type="button" class="btn btn-success mt-2" id="addPronoun">
+                Add Pronoun
+              </button>
+              <button
+                class="btn btn-danger mt-2"
+                id="deletePronoun"
+                onclick="deleteWord(1)"
+              >
+                Delete Pronoun
+              </button>
+            </div>
           </div>
           <!--Adjective-->
           <div class="col-2 d-inline-block form-floating mb-3">
             <input
               type="text"
               class="form-control"
-              id="adjective"
+              id="adjectiveInput"
               placeholder="clumsy"
               required
             />
             <label
               for="validationAdjective"
               id="adjectiveLabel"
-              class="form-label fw-semibold ps-4"
+              class="form-label fw-semibold ps-4 text-secondary"
               >Adjective</label
             >
+            <div class="d-inline-block">
+              <button type="button" class="btn btn-success mt-2" id="addAdjective">
+                Add Adjective
+              </button>
+              <button
+                class="btn btn-danger mt-2"
+                id="deleteAdjective"
+                onclick="deleteWord(2)"
+              >
+                Delete Adjective
+              </button>
+            </div>
           </div>
           <!--Name-->
           <div class="col-2 d-inline-block form-floating mb-3">
             <input
               type="text"
               class="form-control"
-              id="name"
+              id="nameInput"
               placeholder="mother"
               required
             />
             <label
               for="validationName"
               id="nameLabel"
-              class="form-label fw-semibold ps-4"
+              class="form-label fw-semibold ps-4 text-secondary"
               >Name</label
             >
+            <div class="d-inline-block">
+              <button type="button" class="btn btn-success mt-2" id="addName">
+                Add Name
+              </button>
+              <button
+                class="btn btn-danger mt-2"
+                id="deleteName"
+                onclick="deleteWord(3)"
+              >
+                Delete Name
+              </button>
+            </div>
+          </div>
+          <!--Extension-->
+          <div class="col-2 d-inline-block form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="extensionInput"
+              placeholder=".com"
+              required
+            />
+            <label
+              for="validationExtension"
+              id="extensionLabel"
+              class="form-label fw-semibold ps-4 text-secondary"
+              >Extension</label
+            >
+            <div class="d-inline-block">
+              <button type="button" class="btn btn-success mt-2" id="addExtension">
+                Add Extension
+              </button>
+              <button
+                class="btn btn-danger mt-2"
+                id="deleteExtension"
+              >
+                Delete Extension
+              </button>
+            </div>
+          </div>
           </div>
         </div>
-        <br />
-        <div class="col">
-          <div class="col d-inline-block">
-            <input type="radio" id=".com" name="extensionRadio" value=".com" />
-            <label for=".com">.com</label><br />
-          </div>
-          <div class="col d-inline-block">
-            <input type="radio" id=".es" name="extensionRadio" value=".es" />
-            <label for=".es">.es</label><br />
-          </div>
-        </div>
-        <br />
-        <button
-          class="btn btn-outline-light"
-          type="submit"
-          id="createDomainButton"
-        >
-          Create Domain
-        </button>
-
-        <br />
         <br />
       </form>
-      <div id="result"></div>
-      <br />
+      <div class="d-flex justify-content-evenly">
+        <div class="text-center">
+          <button
+            class="btn btn-outline-light"
+            type="submit"
+            id="exampleDomainButton"
+          >
+            Click here to see an example
+          </button><br>
+          <div id="result"></div>
+        </div>
+        <div class="text-center">
+          <button
+            class="btn btn-outline-light"
+            type="submitButton"
+            id="domainPossibilities"
+          >
+            Click here to see your possibilities
+          </button>
+          <div id="possibilities"></div>
+        </div>
+      </div>
     </div>
     <script src="app.js"></script>
   </body>
