@@ -6,310 +6,205 @@ import "./assets/img/rigo-baby.jpg";
 import "./assets/img/4geeks.ico";
 
 window.onload = function() {
-  //examples for the user
-  function domainExampleGenerator() {
-    let pronouns = ["her", "the"];
-    let adjectives = ["clumsy", "suspicious"];
-    let names = ["mother", "teacher"];
-    let extensions = [".com", ".es"];
 
-    let domainExamples = [];
+  let pronouns = ["her", "the"];
+  let adjectives = ["clumsy", "suspicious"];
+  let names = ["mother", "teacher"];
+  let extensions = [".com", ".es"];
 
-    for (let str1 of pronouns) {
-      for (let str2 of adjectives) {
-        for (let str3 of names) {
-          for (let str4 of extensions) {
-            let combination = str1 + str2 + str3 + str4;
-            domainExamples.push(combination);
+  const addPronounButton = document.getElementById("addPronounButton");
+  const addAdjectiveButton = document.getElementById("addAdjectiveButton");
+  const addNameButton = document.getElementById("addNameButton");
+  const addExtensionButton = document.getElementById("addExtensionButton");
+
+  const deletePronounButton = document.getElementById("deletePronounButton");
+  const deleteAdjectiveButton = document.getElementById("deleteAdjectiveButton");
+  const deleteNameButton = document.getElementById("deleteNameButton");
+  const deleteExtensionButton = document.getElementById("deleteExtensionButton");
+
+
+  //Domain generator
+  function domainGenerator() {
+
+    let domainExamples = "";
+
+    for (let i = 0; i < pronouns.length; i++) {
+      for (let j = 0; j < adjectives.length; j++) {
+        for (let k = 0; k < names.length; k++) {
+          for (let l = 0; l < extensions.length; l++) {
+            domainExamples += pronouns[i] + adjectives[j] + names[k] + extensions[l];
           }
         }
       }
     }
-
-    let pronounIndex = Math.floor(Math.random() * pronouns.length);
-    let adjectiveIndex = Math.floor(Math.random() * adjectives.length);
-    let nameIndex = Math.floor(Math.random() * names.length);
-    let extensionIndex = Math.floor(Math.random() * extensions.length);
-
-    let randomDomain =
-      pronouns[pronounIndex] +
-      "" +
-      adjectives[adjectiveIndex] +
-      "" +
-      names[nameIndex] +
-      "" +
-      extensions[extensionIndex];
-    return randomDomain;
+    return domainExamples;
   }
-  document
-    .querySelector("#exampleDomainButton")
+  document.querySelector("#domainButton")
     .addEventListener("click", function(event) {
       event.preventDefault();
       event.target.blur();
-      let generatedDomain = domainExampleGenerator();
+      let generatedDomain = domainGenerator();
       document.querySelector("#result").innerHTML = generatedDomain;
       console.log(generatedDomain);
     });
-  //
 
-  //saving user options
-
-  let emptyPronouns = [""];
-  let emptyAdjectives = [""];
-  let emptyNames = [""];
-  let emptyExtensions = [""];
+  //Adding user options
 
   function addPronoun() {
-    let pronounInput = document.getElementById("pronounInput").value.trim();
-    let pronoun = pronounInput.trim();
+    const pronounInput = document.getElementById("pronounInput");
+    const pronounValue = pronounInput.value.trim();
 
-    if (pronoun !== "" && !emptyPronouns.includes(pronoun)) {
-      emptyPronouns.push(pronoun);
-      pronounInput = "";
-      showAlert("Word successfully added: " + pronoun);
-      console.log("Word successfully added:" + pronoun);
+    if (pronounValue !== "" && !pronouns.includes(pronounValue)) {
+      pronouns.push(pronounValue);
+      showAlert(`${pronounValue} successfully added!`, "success");
+      console.log("Word successfully added:" + pronounValue);
     } else {
-      showAlert("Word not added, already exists: " + pronoun);
-      console.log("Word not added, already exists:" + pronoun);
+      showAlert(`${pronounValue} not added, already exists`, "warning");
+      console.log("Word not added, already exists:" + pronounValue);
     }
   }
-  document.getElementById("addPronoun").addEventListener("click", () => {
-    const addedPronoun = addPronoun();
-    if (addedPronoun) {
-      return showSaveAlert();
-    }
-  });
+  addPronounButton.addEventListener("click", () => {
+    addPronoun();
+    document.getElementById("pronounInput").value = ""});
 
   function addAdjective() {
-    let adjectiveInput = document.getElementById("adjectiveInput").value.trim();
-    let adjective = adjectiveInput.trim();
+    const adjectiveInput = document.getElementById("adjectiveInput");
+    const adjectiveValue = adjectiveInput.value.trim();
 
-    if (adjective !== "" && !emptyAdjectives.includes(adjective)) {
-      emptyAdjectives.push(adjective);
-      adjectiveInput = "";
-      showAlert("Word successfully added: " + adjective);
-      console.log("Word successfully added:" + adjective);
+    if (adjectiveValue !== "" && !adjectives.includes(adjectiveValue)) {
+      adjectives.push(adjectiveValue);
+      showAlert(`${adjectiveValue} successfully added!`, "success");
+      console.log("Word successfully added:" + adjectiveValue);
     } else {
-      showAlert("Word not added, already exists: " + adjective);
-      console.log("Word not added, already exists:" + adjective);
+      showAlert(`${adjectiveValue} not added, already exists`, "warning");
+      console.log("Word not added, already exists:" + adjectiveValue);
     }
   }
-  document.getElementById("addAdjective").addEventListener("click", () => {
-    const addedAdjective = addAdjective();
-    if (addedAdjective) {
-      return showSaveAlert();
-    }
-  });
+  addAdjectiveButton.addEventListener("click", () => {
+    addAdjective();
+    document.getElementById("adjectiveInput").value = ""});
 
-  function addName() {
-    let nameInput = document.getElementById("nameInput").value.trim();
-    let name = nameInput.trim();
+function addName() {
+  const nameInput = document.getElementById("nameInput");
+  const nameValue = nameInput.value.trim();
 
-    if (name !== "" && !emptyNames.includes(name)) {
-      emptyNames.push(name);
-      nameInput = "";
-      showAlert("Word successfully added: " + name);
-      console.log("Word successfully added:" + name);
-    } else {
-      showAlert("Word not added, already exists: " + name);
-      console.log("Word not added, already exists:" + name);
-    }
+  if (nameValue !== "" && !adjectives.includes(nameValue)) {
+    names.push(nameValue);
+    showAlert(`${nameValue} successfully added!`, "success");
+    console.log("Word successfully added:" + nameValue);
+  } else {
+    showAlert(`${nameValue} not added, already exists`, "warning");
+    console.log("Word not added, already exists:" + nameValue);
   }
-
-  document.getElementById("addName").addEventListener("click", () => {
-    const addedName = addName();
-    if (addedName) {
-      return showSaveAlert();
-    }
-  });
+}
+addNameButton.addEventListener("click", () => {
+  addName();
+  document.getElementById("nameInput").value = ""});
 
   function addExtension() {
-    let extensionInput = document.getElementById("extensionInput").value.trim();
-    let extension = extensionInput.trim();
-
-    if (extension !== "" && !emptyExtensions.includes(extension)) {
-      emptyExtensions.push(extension);
-      extensionInput = "";
-      showAlert("Word successfully added: " + extension);
-      console.log("Word successfully added:" + extension);
+    const extensionInput = document.getElementById("extensionInput");
+    const extensionValue = extensionInput.value.trim();
+  
+    if (extensionValue !== "" && !extensions.includes(extensionValue)) {
+      extensions.push(extensionValue);
+      showAlert(`${extensionValue} successfully added!`, "success");
+      console.log("Word successfully added:" + extensionValue);
     } else {
-      showAlert("Word not added, already exists: " + extension);
-      console.log("Word not added, already exists:" + extension);
+      showAlert(`${extensionValue} not added, already exists`, "warning");
+      console.log("Word not added, already exists:" + extensionValue);
     }
   }
+  addExtensionButton.addEventListener("click", () => {
+    addExtension();
+    document.getElementById("extensionInput").value = ""});
 
-  document.getElementById("addExtension").addEventListener("click", () => {
-    const addedExtension = addExtension();
-    if (addedExtension) {
-      return showSaveAlert();
-    }
-  });
-  function showSaveAlert(message) {
-    const alertElement = document.getElementById("savedWordMessage");
-    alertElement.innerText = message;
+
+  function showAlert(message, type) {
+    const alertElement = document.getElementById("alert");
+    const alert = document.createElement("div");
+    alert.className = `alert alert-${type} alert-dismissible fade show`;
+    alert.role = "alert";
+    alert.innerHTML = `${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>`;
+    alertElement.appendChild(alert);
+
+    setTimeout(() => {
+      alert.classList.remove("show");
+      alert.addEventListener("transitionend", () => alert.remove());
+    }, 2000);
   }
 
   //deleting words
   function deletePronoun() {
-    let pronounInput = document.getElementById("pronounInput").value.trim();
-    let pronoun = pronounInput.trim();
-
-    if (emptyPronouns.includes(pronoun)) {
-      emptyPronouns.splice(emptyPronouns.indexOf(pronoun), 1);
-      pronounInput.value = "";
-      showAlert("Word successfully deleted: " + pronoun);
-      console.log("Word successfully deleted: " + pronoun);
+    const pronounInput = document.getElementById("pronounInput");
+    const pronounValue = pronounInput.value.trim();
+    const pronounIndex = pronouns.indexOf(pronounValue)
+  
+    if (pronounIndex !== -1) {
+      pronouns.splice(pronounIndex,1);
+      showAlert(`${pronounValue} successfully deleted!`, "success");
+      console.log("Word successfully dedeleted:" + pronounValue);
     } else {
-      showAlert(`The word "${pronounInput}" was not found in the variable.`);
-      console.log(`The word "${pronounInput}" was not found in the variable.`);
+      showAlert(`${pronounValue} not deleted, already exists`, "warning");
+      console.log("Word not deleted, already exists:" + pronounValue);
     }
   }
+  deletePronounButton.addEventListener("click", () => {
+    deletePronoun();
+    document.getElementById("pronounInput").value = ""});
 
-  document.getElementById("deletePronoun").addEventListener("click", () => {
-    let deletedPronoun = deletePronoun();
-    if (deletedPronoun) {
-      return showDeleteAlert();
-    }
-  });
+function deleteAdjective() {
+  const adjectiveInput = document.getElementById("adjectiveInput");
+  const adjectiveValue = adjectiveInput.value.trim();
+  const adjectiveIndex = adjectives.indexOf(adjectiveValue)
 
-  function deleteAdjective() {
-    let adjectiveInput = document.getElementById("adjectiveInput").value.trim();
-    let adjective = adjectiveInput.trim();
-
-    if (emptyAdjectives.includes(adjective)) {
-      emptyAdjectives.splice(emptyAdjectives.indexOf(adjective), 1);
-      adjectiveInput.value = "";
-      showAlert("Word successfully deleted: " + adjective);
-      console.log("Word successfully deleted: " + adjective);
-    } else {
-      showAlert(`The word "${adjectiveInput}" was not found in the variable.`);
-      console.log(
-        `The word "${adjectiveInput}" was not found in the variable.`
-      );
-    }
+  if (adjectiveIndex !== -1) {
+    adjectives.splice(adjectiveIndex,1);
+    showAlert(`${adjectiveValue} successfully deleted!`, "success");
+    console.log("Word successfully dedeleted:" + adjectiveValue);
+  } else {
+    showAlert(`${adjectiveValue} not deleted, already exists`, "warning");
+    console.log("Word not deleted, already exists:" + adjectiveValue);
   }
+}
+deleteAdjectiveButton.addEventListener("click", () => {
+  deleteAdjective();
+  document.getElementById("adjectiveInput").value = ""});
 
-  document.getElementById("deleteAdjective").addEventListener("click", () => {
-    let deletedAdjective = deleteAdjective();
-    if (deletedAdjective) {
-      return showDeleteAlert();
-    }
-  });
+function deleteName() {
+  const nameInput = document.getElementById("nameInput");
+  const nameValue = nameInput.value.trim();
+  const nameIndex = names.indexOf(nameValue)
 
-  function deleteName() {
-    let nameInput = document.getElementById("nameInput").value.trim();
-    let name = nameInput.trim();
-
-    if (emptyNames.includes(name)) {
-      emptyNames.splice(emptyNames.indexOf(name), 1);
-      nameInput.value = "";
-      showAlert("Word successfully deleted: " + name);
-      console.log("Word successfully deleted: " + name);
-    } else {
-      showAlert(`The word "${nameInput}" was not found in the variable.`);
-      console.log(`The word "${nameInput}" was not found in the variable.`);
-    }
+  if (nameIndex !== -1) {
+    names.splice(nameIndex,1);
+    showAlert(`${nameValue} successfully deleted!`, "success");
+    console.log("Word successfully dedeleted:" + nameValue);
+  } else {
+    showAlert(`${nameValue} not deleted, already exists`, "warning");
+    console.log("Word not deleted, already exists:" + nameValue);
   }
-
-  document.getElementById("deleteName").addEventListener("click", () => {
-    let deletedName = deleteName();
-    if (deletedName) {
-      return showDeleteAlert();
-    }
-  });
+}
+deleteNameButton.addEventListener("click", () => {
+  deleteName();
+  document.getElementById("nameInput").value = ""});
 
   function deleteExtension() {
-    let extensionInput = document.getElementById("extensionInput").value.trim();
-    let extension = extensionInput.trim();
-
-    if (emptyExtensions.includes(extension)) {
-      emptyExtensions.splice(emptyExtensions.indexOf(extension), 1);
-      extensionInput.value = "";
-      showAlert("Word successfully deleted: " + extension);
-      console.log("Word successfully deleted: " + extension);
+    const extensionInput = document.getElementById("extensionInput");
+    const extensionValue = extensionInput.value.trim();
+    const extensionIndex = extensions.indexOf(extensionValue)
+  
+    if (extensionIndex !== -1) {
+      extensions.splice(extensionIndex,1);
+      showAlert(`${extensionValue} successfully deleted!`, "success");
+      console.log("Word successfully dedeleted:" + extensionValue);
     } else {
-      showAlert(`The word "${extensionInput}" was not found in the variable.`);
-      console.log(
-        `The word "${extensionInput}" was not found in the variable.`
-      );
+      showAlert(`${extensionValue} not deleted, already exists`, "warning");
+      console.log("Word not deleted, already exists:" + nameVaextensionValuelue);
     }
   }
+  deleteExtensionButton.addEventListener("click", () => {
+    deleteExtension();
+    document.getElementById("extensionInput").value = ""});
 
-  document.getElementById("deleteExtension").addEventListener("click", () => {
-    let deletedExtension = deleteExtension();
-    if (deletedExtension) {
-      return showDeleteAlert();
-    }
-  });
-  function showDeleteAlert(message) {
-    const alertElement = document.getElementById("deletedWordMessage");
-    alertElement.innerText = message;
-  }
-
-  //showing result from user option
-  function userPossibilities() {
-    let userResult = [];
-
-    for (let pronounValue of emptyPronouns) {
-      for (let adjectiveValue of emptyAdjectives) {
-        for (let nameValue of emptyNames) {
-          for (let extensionValue of emptyExtensions) {
-            let userCombination =
-              pronounValue + adjectiveValue + nameValue + extensionValue;
-            userResult.push(userCombination);
-          }
-        }
-      }
-    }
-    return userResult.join("/n");
-  }
-  document
-    .getElementById("domainPossibilities")
-    .addEventListener("click", function(event) {
-      event.preventDefault();
-
-      let userResult = userPossibilities();
-      const resultElement = document.getElementById("possibilities");
-      resultElement.textContent =
-        "Your possible domains: " + userResult.join("");
-      displayConfirmationAlert();
-    });
-
-  //display User Possibilities
-  function displayUserPossibilities() {
-    const possibilities = [];
-
-    emptyPronouns.forEach(pronoun => {
-      emptyAdjectives.forEach(adjective => {
-        emptyNames.forEach(name => {
-          emptyExtensions.forEach(extension => {
-            possibilities.push(`${pronoun}${adjective}${name}.${extension}`);
-          });
-        });
-      });
-    });
-
-    return possibilities;
-  }
-  document
-    .getElementById("domainForm")
-    .addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const pronounInput = document.getElementById("pronoun").value;
-      const adjectiveInput = document.getElementById("adjective").value;
-      const nameInput = document.getElementById("name").value;
-      const extensionInput = document.getElementById("extension").value;
-
-      emptyPronouns.push(pronounInput);
-      emptyAdjectives.push(adjectiveInput);
-      emptyNames.push(nameInput);
-      emptyExtensions.push(extensionInput);
-
-      deleteWordFromArray(pronounInput, emptyPronouns);
-      deleteWordFromArray(adjectiveInput, emptyAdjectives);
-      deleteWordFromArray(nameInput, emptyNames);
-
-      displayUserPossibilities();
-    });
-};
+  };
