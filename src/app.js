@@ -25,28 +25,36 @@ window.onload = function() {
 
   //Domain generator
   function domainGenerator() {
+    let domains = [];
 
-    let domainExamples = "";
-
-    for (let i = 0; i < pronouns.length; i++) {
-      for (let j = 0; j < adjectives.length; j++) {
-        for (let k = 0; k < names.length; k++) {
-          for (let l = 0; l < extensions.length; l++) {
-            domainExamples += pronouns[i] + adjectives[j] + names[k] + extensions[l];
+    for (let pronoun of pronouns) {
+      for (let adjective of adjectives) {
+        for (let name of names) {
+          for (let extension of extensions) {
+            domains.push(`${pronoun}${adjective}${name}${extension}`);
           }
         }
       }
     }
-    return domainExamples;
+  
+    return domains.join("\n");
   }
-  document.querySelector("#domainButton")
-    .addEventListener("click", function(event) {
-      event.preventDefault();
-      event.target.blur();
-      let generatedDomain = domainGenerator();
-      document.querySelector("#result").innerHTML = generatedDomain;
-      console.log(generatedDomain);
-    });
+
+  function generateDomains() {
+    let divElement = document.getElementById("result");
+    divElement.innerHTML = domainGenerator();
+  }
+
+  document
+    .getElementById("domainButton")
+    .addEventListener("click", generateDomains);
+
+
+
+
+
+
+
 
   //Adding user options
 
@@ -59,7 +67,7 @@ window.onload = function() {
       showAlert(`${pronounValue} successfully added!`, "success");
       console.log("Word successfully added:" + pronounValue);
     } else {
-      showAlert(`${pronounValue} not added, already exists`, "warning");
+      showAlert(`${pronounValue} already exists`, "warning");
       console.log("Word not added, already exists:" + pronounValue);
     }
   }
@@ -76,7 +84,7 @@ window.onload = function() {
       showAlert(`${adjectiveValue} successfully added!`, "success");
       console.log("Word successfully added:" + adjectiveValue);
     } else {
-      showAlert(`${adjectiveValue} not added, already exists`, "warning");
+      showAlert(`${adjectiveValue} already exists`, "warning");
       console.log("Word not added, already exists:" + adjectiveValue);
     }
   }
@@ -93,7 +101,7 @@ function addName() {
     showAlert(`${nameValue} successfully added!`, "success");
     console.log("Word successfully added:" + nameValue);
   } else {
-    showAlert(`${nameValue} not added, already exists`, "warning");
+    showAlert(`${nameValue} already exists`, "warning");
     console.log("Word not added, already exists:" + nameValue);
   }
 }
@@ -110,7 +118,7 @@ addNameButton.addEventListener("click", () => {
       showAlert(`${extensionValue} successfully added!`, "success");
       console.log("Word successfully added:" + extensionValue);
     } else {
-      showAlert(`${extensionValue} not added, already exists`, "warning");
+      showAlert(`${extensionValue} already exists`, "warning");
       console.log("Word not added, already exists:" + extensionValue);
     }
   }
